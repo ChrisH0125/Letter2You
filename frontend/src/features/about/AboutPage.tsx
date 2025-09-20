@@ -1,3 +1,5 @@
+import Footer from '../../components/Footer'
+
 export default function AboutPage() {
   const team = [
       { name: 'Chris Ho', role: 'API Integration and Frontend', bio: 'Implemented API to create meaningful features', avatar: 'src/assets/Chris.jpg' },
@@ -71,7 +73,7 @@ export default function AboutPage() {
         </section>
 
       </div>
-      <footer className="h-24 flex items-center justify-center text-sm text-[#3b2a2a]">© {new Date().getFullYear()} Letter2You — Made with care.</footer>
+      <Footer />
     </main>
   )
 }
