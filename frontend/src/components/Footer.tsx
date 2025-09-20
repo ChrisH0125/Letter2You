@@ -9,7 +9,7 @@ export default function Footer() {
 							<img src="/src/assets/Logo.png" alt="logo" className="h-10 w-10 rounded" />
 							<span className="font-semibold text-lg text-green-300">Letter2You</span>
 						</div>
-						<p className="text-sm text-gray-300 max-w-xs">Hacking Done Differently. Simple tools for sending handwritten-style letters.</p>
+						<p className="text-sm text-gray-300 max-w-xs"></p>
 					</div>
 
 					<div>
