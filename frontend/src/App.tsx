@@ -31,7 +31,7 @@ function App() {
               </div>
 
             </div>
-           
+
         </div>
 
            <div className = "buttonWrap">
@@ -41,9 +41,9 @@ function App() {
                 <button> Send Letter </button>
                 {/* Make camera button take picture of you and store that image somewhere, pass to PolaroidPreview function */}
                 <button className = "cameraButton"> <img src = {cameraIcon}></img> </button>
-              
+
               </div>
-          
+
       </div>
 
       {/* LINKS TO DIFFERENT PAGES WOULD GO IN A DIV IN HERE (for bottom option) */}
