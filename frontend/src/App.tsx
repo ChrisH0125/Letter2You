@@ -1,35 +1,59 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import { auth } from "./firebaseClient";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [user, setUser] = useState<any>(null);
+  const [isLogin, setIsLogin] = useState(true); // toggle between login/signup
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      let res;
+      if (isLogin) {
+        res = await signInWithEmailAndPassword(auth, email, password);
+      } else {
+        res = await createUserWithEmailAndPassword(auth, email, password);
+      }
+      setUser(res.user);
+    } catch (err: any) {
+      alert(err.message);
+    }
+  };
+
+  if (user) {
+    return <h2>Welcome, {user.email}</h2>;
+  }
 
   return (
-    <>
-      <div> 
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
+    <div style={{ padding: "2rem" }}>
+      <h1>{isLogin ? "Login" : "Sign Up"}</h1>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <br />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <br />
+        <button type="submit">{isLogin ? "Login" : "Sign Up"}</button>
+      </form>
+      <p onClick={() => setIsLogin(!isLogin)} style={{ cursor: "pointer", color: "blue" }}>
+        {isLogin ? "Need an account? Sign up" : "Already have an account? Log in"}
       </p>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;

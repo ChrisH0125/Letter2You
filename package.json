@@ -1,11 +1,17 @@
 {
   "name": "letter2you",
   "private": true,
-  "workspaces": ["frontend", "backend"],
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
   "scripts": {
     "dev": "concurrently \"npm:dev --workspace=frontend\" \"npm:dev --workspace=backend\""
   },
   "devDependencies": {
     "concurrently": "^8.2.0"
+  },
+  "dependencies": {
+    "firebase": "^12.3.0"
   }
 }
