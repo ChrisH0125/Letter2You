@@ -7,7 +7,7 @@
   font-weight: 400;
 
   color-scheme: light;
-  color: #3b2a2a;
+  color: #FFFDF6;
   background-color: #e6d5ac;
 
   font-synthesis: none;
@@ -34,7 +34,7 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  color: #3b2a2a;
+  color: #FFFDF6;
   overflow-x: hidden;
   overflow-y: auto;
 }
