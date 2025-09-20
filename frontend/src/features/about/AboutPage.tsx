@@ -9,25 +9,20 @@ export default function AboutPage() {
   ]
 
   return (
-    <main className="min-h-screen flex flex-col">
-      <div className="max-w-screen-xl mx-auto px-10 py-10 flex-1 pt-28" style={{ minHeight: 'calc(100vh - 120px)' }}>
-
-        <header className="fixed top-6 left-6 z-50 flex items-center gap-4 bg-transparent">
-          <img src="/src/assets/Logo.png" alt="logo" className="h-16 w-16 rounded p-2" />
-          <h1 className="text-3xl md:text-4xl font-extrabold text-[#7b1233]">Letter2You</h1>
-        </header>
+    <main className="w-full bg-[#E7C9A9]">
+      <div className="py-10 px-6 bg-[#E7C9A9]">
 
         <section className="text-center mb-10">
           <h2 className="text-5xl md:text-6xl font-extrabold">About Letter2You</h2>
           <p className="mt-4 text-lg md:text-xl text-[#3b2a2a] max-w-3xl mx-auto">We make it easy to send meaningful, handwritten-style letters to the people who matter.</p>
         </section>
 
-        <section className="grid md:grid-cols-2 gap-6 items-center mb-10">
+        <section className="grid md:grid-cols-2 gap-6 items-center mb-10 bg-white border rounded-lg p-5">
           <div>
-            <h2 className="text-xl font-semibold">Our mission</h2>
+            <h2 className="text-xl font-semibold text-[#3b2a2a]">Our mission</h2>
             <p className="mt-2 text-[#3b2a2a]">To reconnect people through thoughtful, tangible messages. We combine simple tools with beautiful designs so anyone can send a letter that feels personal.</p>
 
-            <ul className="mt-4 space-y-2">
+            <ul className="mt-4 space-y-2 text-[#3b2a2a]">
               <li className="flex items-start">
                 <span className="inline-block mr-3 text-green-600">✓</span>
                 <span>Fast, friendly flows for creating letters.</span>
@@ -44,7 +39,7 @@ export default function AboutPage() {
           </div>
 
           <div className="bg-white border rounded-lg p-5">
-            <h3 className="font-semibold">Why Letter2You?</h3>
+            <h3 className="font-semibold text-[#3b2a2a]">Why Letter2You?</h3>
             <p className="mt-2 text-[#3b2a2a]">Because small gestures matter. A handwritten-style note can brighten someone's day — we help you do that without friction and have a customizable photo in your message.</p>
             <div className="mt-4">
               <button className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Try it out!</button>
