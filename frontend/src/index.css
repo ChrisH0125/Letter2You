@@ -7,7 +7,7 @@
   font-weight: 400;
 
   color-scheme: light;
-  color: #3b2a2a;
+  color: #FFFDF6;
   background-color: #e6d5ac;
 
   font-synthesis: none;
@@ -34,7 +34,7 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  color: #3b2a2a;
+  color: #FFFDF6;
   overflow-x: hidden;
   overflow-y: auto;
 }
@@ -61,17 +61,23 @@ h1 {
 
 button {
   border-radius: 8px;
-  border: 1px solid transparent;
+  border: 3px solid transparent;
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  margin-top: 1rem;
+  margin-bottom: auto;
+  margin-left: auto;
+  margin-right: 1rem;
+  background-color: #F7A1B2;
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: border-color 0.25s, background-color 0.25s,
+    color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: #8F002D;
+  background-color: #8F002D;
 }
 button:focus,
 button:focus-visible {
