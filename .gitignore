@@ -28,8 +28,7 @@ Thumbs.db
 /.vercel
 
 # Firebase functions
-/backend/functions/node_modules/
-/backend/functions/.firebase
+node_modules/
 
 # Misc
 coverage/
