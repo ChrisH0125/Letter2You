@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Bubblegum+Sans&display=swap');
+
 #root {
   width: 100%;
   height: 100vh;
+  font-family: 'Bubblegum Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 
 .page {
@@ -95,6 +98,39 @@ button.cameraButton img{
   filter: drop-shadow(0 0 2em #8F002D);
 }
 .logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+/* Footer logo hover effect (reuses the drop-shadow style from .logo) */
+.footer-logo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 200px;
+  height: auto;
+  margin: 0 auto;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.footer-logo:hover {
+  filter: drop-shadow(0 0 2em #8F002D);
+}
+
+/* Force footer brand color */
+.footer-root a, .footer-root a svg {
+  color: #FB7185; /* fallback if svg respects currentColor */
+}
+.footer-root a {
+  color: #FB7185 !important;
+}
+.footer-root a:hover {
+  color: #FF93A6 !important;
+}
+.footer-root svg {
+  fill: currentColor;
+}
+
+.footer.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 

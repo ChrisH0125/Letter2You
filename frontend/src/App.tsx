@@ -4,8 +4,8 @@ import PolaroidPreview from './components/PolaroidPreview'
 import LetterForm from './features/letters/LetterForm'
 import cameraIcon from './assets/cameraIcon.png'
 import AboutPage from './features/about/AboutPage'
-import './App.css'
 
+import './App.css'
 function App() {
   const [view, setView] = useState<'home' | 'about'>('home')
 
