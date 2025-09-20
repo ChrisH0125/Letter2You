@@ -1,0 +1,36 @@
+node_modules/
+node_modules
+**/node_modules/
+
+# Build outputs
+dist/
+build/
+
+# Environment
+.env
+.env.*
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDE
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Frontend
+/.parcel-cache
+/.vercel
+
+# Firebase functions
+/backend/functions/node_modules/
+/backend/functions/.firebase
+
+# Misc
+coverage/
+*.local
