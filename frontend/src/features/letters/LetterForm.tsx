@@ -12,10 +12,12 @@ function LetterForm(_props: any, ref: any) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault(); // prevent page reload
     const user = auth.currentUser;
+
     if (!user) {
       alert("You must be signed in to send a letter."); 
       return; 
-    }
+    } 
+
     try {
       await addDoc(collection(db, "letters"), {
         uid: user.uid, 
@@ -96,7 +98,7 @@ function LetterForm(_props: any, ref: any) {
         value={message + interim}
         onChange={(e) => { setMessage(e.target.value); setInterim(""); }}
         required
-      />
+      /> 
 
       <div className="flex items-center justify-start mt-2 gap-3">
         {status && <p className="text-gray-700">{status}</p>}

@@ -10,6 +10,11 @@ import Footer from './components/Footer'
 import SignUp from './features/auth/SignUp'
 import Navbar from './components/Navbar'
 import HelpPopup from './components/HelpPopup'
+// firebase 
+import { auth } from "./firebaseClient";
+import { signOut } from 'firebase/auth';
+
+signOut(auth).catch((err) => console.error("Error signing out on startup:", err));
 
 import './App.css'
 
