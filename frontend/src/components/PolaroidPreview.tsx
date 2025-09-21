@@ -1,15 +1,13 @@
 import { useRef, useState, useEffect } from 'react'
-import littleGuy from '../assets/littleGuy.png'
-import cameraIcon from '../assets/cameraIcon.png'
 
 export default function PolaroidPreview(){
   const [imageSrc, setImageSrc] = useState<string | null>(null)
   const [desc, setDesc] = useState<string>('')
   const [showCamera, setShowCamera] = useState(false)
   const [showDescInput, setShowDescInput] = useState(false)
+  const preventOpenRef = useRef(false)
   const videoRef = useRef<HTMLVideoElement | null>(null)
   const streamRef = useRef<MediaStream | null>(null)
-  const canvasRef = useRef<HTMLCanvasElement | null>(null)
 
   useEffect(() => {
     return () => {
@@ -22,7 +20,10 @@ export default function PolaroidPreview(){
   }, [])
 
   async function openCamera(){
+    if (preventOpenRef.current) return
     setShowCamera(true)
+    // mark body so global UI (send button) can hide while camera/modal is open
+    try { document.body.classList.add('polaroid-modal-open') } catch(e) {}
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' }, audio: false })
       streamRef.current = stream
@@ -39,6 +40,8 @@ export default function PolaroidPreview(){
 
   function closeCamera(){
     setShowCamera(false)
+    // remove modal marker
+    try { document.body.classList.remove('polaroid-modal-open') } catch(e) {}
     if (videoRef.current) {
       try { videoRef.current.pause() } catch(e) {}
       videoRef.current.srcObject = null
@@ -69,32 +72,39 @@ export default function PolaroidPreview(){
     closeCamera()
     // prompt for description inline
     setShowDescInput(true)
+    try { document.body.classList.add('polaroid-modal-open') } catch(e) {}
   }
 
   function saveDescription() {
+    // keep the captured image and close the description prompt
     setShowDescInput(false)
+    // ensure camera is closed
+    closeCamera()
+    // briefly prevent re-opening due to click event bubbling
+    preventOpenRef.current = true
+    setTimeout(() => { preventOpenRef.current = false }, 300)
   }
 
+  // ensure body class is removed on unmount
+  useEffect(() => {
+    return () => {
+      try { document.body.classList.remove('polaroid-modal-open') } catch(e) {}
+    }
+  }, [])
+
   return (
-    <div className="relative flex flex-col items-center">
-      {/* camera button above polaroid */}
-      <button onClick={openCamera} className="mb-3 rounded-full bg-pink-200 p-3 cameraButton shadow-lg">
-        <img src={cameraIcon} alt="open camera" style={{ width: 28, height: 28 }} />
-      </button>
+    <div className="relative flex flex-col items-center polaroid-section-outer">
+  <div className="polaroid-frame" onClick={(e) => { e.stopPropagation(); if (!showCamera && !showDescInput) openCamera() }} title="Click to add photo">
+        {imageSrc ? (
+          <div className="polaroid-inner">
+            <img src={imageSrc} alt={desc || 'Captured polaroid'} className="polaroid-img" />
+          </div>
+        ) : (
+          <div className="polaroid-inner polaroid-placeholder" />
+        )}
 
-      <div className="bg-white w-[220px] h-[260px] p-3 flex flex-col items-center relative rounded-md shadow-md">
-        <div className="bg-black w-full h-[85%] flex items-center justify-center overflow-hidden">
-          {imageSrc ? (
-            <img src={imageSrc} alt={desc || 'Captured polaroid'} className="object-cover w-full h-full" />
-          ) : (
-            <div className="flex flex-col items-center justify-center text-center text-[#2B1917] p-4">
-              <img src={littleGuy} alt="placeholder" className="w-28 h-28 object-contain mb-2" />
-              <div className="text-sm text-red-400">No photo yet!</div>
-            </div>
-          )}
-        </div>
-
-        <p className="absolute text-red-400 bottom-3 text-center text-xs w-full px-2">{desc || 'Image description'}</p>
+        {/* place description inside the white polaroid bottom area */}
+        {desc && <p className="polaroid-desc">{desc}</p>}
       </div>
 
       {/* camera overlay */}
@@ -120,10 +130,18 @@ export default function PolaroidPreview(){
         <div className="mt-2 w-[220px] bg-white p-3 rounded shadow">
           <label className="block text-xs text-red-700">Add an image description (optional)</label>
           <input className="w-full mt-2 p-2 border rounded text-red-400" value={desc} onChange={(e) => setDesc(e.target.value)} />
-          <div className="mt-2 flex justify-end">
-            <button onClick={() => { setShowDescInput(false) }} className="px-3 py-1 mr-2">Skip</button>
-            <button onClick={saveDescription} className="px-3 py-1 bg-pink-500 text-white rounded">Save</button>
-          </div>
+            <div className="mt-2 flex justify-end">
+              <button onClick={() => {
+                // clear any typed description and close prompt
+                setDesc('')
+                setShowDescInput(false)
+                closeCamera()
+                // prevent immediate reopen due to click bubbling
+                preventOpenRef.current = true
+                setTimeout(() => { preventOpenRef.current = false }, 300)
+              }} className="px-3 py-1 mr-2">Skip</button>
+              <button onClick={saveDescription} className="px-3 py-1 bg-pink-500 text-white rounded">Save</button>
+            </div>
         </div>
       )}
     </div>

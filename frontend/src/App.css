@@ -11,12 +11,205 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 2rem;
-  max-width: 800px;
+  max-width: 1200px;
   width: 100%;
   margin: 0;
-  margin-left: 3rem;
+  margin-left: 4rem;
   padding: 0, 2rem;
 }
+
+:root{
+  --brand-maroon: #8F002D;
+  --brand-pink: #F6D6DA;
+  --panel-pink: #F8DBDF;
+  --cream-bg: #FBF6F4;
+  --muted: #EDEDED;
+}
+
+body, #root {
+  background: var(--cream-bg);
+}
+
+.app-hero {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 3.5rem 1rem 6rem 1rem;
+}
+
+.hero-panel {
+  width: 90%;
+  max-width: 1200px;
+  background: var(--panel-pink);
+  /* make the panel look like a horizontal pill that can contain both the textbox and polaroid */
+  border-radius: 40px;
+  padding: 2.5rem 3.5rem; /* reduce vertical padding, increase horizontal room */
+  box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+  position: relative;
+  padding-left: 6.5rem; /* extra left padding so controls sit in the pink area and not over the textarea */
+  padding-right: 12rem; /* more right padding so polaroid stays fully inside */
+  padding-bottom: 3.5rem; /* extra bottom space so tall elements don't overflow */
+}
+
+.left-controls {
+  position: absolute;
+  left: 11px; /* moved further left so buttons sit clearly outside the textarea */
+  top: 50%; /* place in the vertical middle of the hero panel */
+  transform: translateY(-50%); /* center the controls vertically */
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  z-index: 20;
+}
+
+.control-btn{
+  width: 78px;
+  height: 78px;
+  border-radius: 50%;
+  background: var(--brand-maroon);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+  cursor: pointer;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.control-btn:hover{ transform: translateY(-4px); box-shadow: 0 12px 20px rgba(0,0,0,0.14); }
+
+.control-btn svg, .control-btn img{ width: 40px !important; height: 40px !important; object-fit: contain; display:block; }
+.control-btn svg { display: block; }
+.control-btn{ font-size: 1.6rem }
+
+.letter-area {
+  display: flex;
+  gap: 3rem;
+  align-items: flex-start;
+}
+
+.letter-polaroid-container { /* explicit container used in App.tsx */
+  display: flex;
+  gap: 48px; /* space between the letter and polaroid */
+  align-items: center;
+  width: 100%; /* allow children to position across full panel width */
+}
+
+.letter-box{
+  background: #ffffff; /* white textarea area per screenshot */
+  width: 360px;
+  height: 620px;
+  border-radius: 10px;
+  padding: 1.25rem 1rem;
+  box-shadow: 0 8px 26px rgba(0,0,0,0.07);
+  border: 1px solid rgba(0,0,0,0.04);
+}
+
+.polaroid-frame{
+  width: 320px;
+  height: 440px; /* slightly reduced to keep inside panel */
+  background: #ffffff; /* white polaroid outer frame */
+  border-radius: 6px;
+  box-shadow: 0 26px 46px rgba(0,0,0,0.12);
+  border: 18px solid #fff; /* thick white polaroid border */
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  cursor: pointer;
+  padding-top: 42px; /* move inner image lower to create polaroid bottom area */
+  position: relative; /* allow absolute desc inside */
+  margin-left: -6px; /* nudge left slightly to keep inside panel */
+}
+
+.polaroid-inner{ /* inner area where image sits */
+  width: 80%;
+  height: 68%; /* reduce height to preserve visible polaroid bottom band */
+  background: #d9d9d9; /* grey placeholder */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.polaroid-placeholder{ background: #d9d9d9 }
+
+.polaroid-img{ width: 100%; height: 100%; object-fit: cover }
+
+/* ensure captured images are vertically centered and don't push into the bottom band */
+.polaroid-inner .polaroid-img{ object-position: center top }
+
+.letter-textarea{
+  width: 100%;
+  height: 100%;
+  resize: none;
+  border: none;
+  outline: none;
+  padding: 28px 20px;
+  font-size: 1rem;
+  color: #2b2b2b;
+  background: transparent;
+}
+
+.send-btn{
+  background: var(--brand-maroon);
+  color: white;
+  padding: 0.9rem 2.25rem;
+  border-radius: 12px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  min-width: 180px;
+  border: none;
+  cursor: pointer;
+}
+
+.send-row{ /* place send button at the end (bottom-right) of the hero panel */
+  position: absolute;
+  right: 3.5rem; /* match hero-panel right padding */
+  bottom: 1.75rem; /* sit comfortably above the panel bottom */
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  z-index: 40; /* ensure button sits above polaroid */
+  width: auto;
+  margin: 0;
+  padding: 0;
+}
+
+/* hide send button while camera modal or description input is shown so it doesn't overlap */
+body.polaroid-modal-open .send-row{ display: none !important }
+
+.footer-bar{
+  background: #e9e9e9;
+  padding: 1rem 0;
+  text-align: center;
+  color: #666;
+}
+
+.help-trigger{ display:none; }
+.help-button{ width: 72px; height: 72px; border-radius: 8px; background: transparent; display:flex;align-items:center;justify-content:center; box-shadow: none; cursor:pointer}
+.help-bubble{ background:#fff0f3; padding:8px 16px; border-radius:16px; box-shadow: 0 8px 20px rgba(0,0,0,0.08); color:#5b2b2b; white-space:nowrap; display:inline-block; }
+
+.hero-panel .help-wrapper{ position:absolute; right: -180px; bottom: 18px; display:flex; flex-direction:column; align-items:center; gap:6px }
+
+/* outside helper container positioning handled inline in App.tsx but tweak bubble */
+.help-bubble{ background:#fff0f3; padding:10px 16px; border-radius:16px; box-shadow: 0 8px 20px rgba(0,0,0,0.08); color:#5b2b2b; font-size:0.95rem; white-space:nowrap }
+
+.help-popup{ position: fixed; right: 32px; bottom: 220px; width: 360px; max-width: calc(100% - 48px); background: #fff; border-radius: 10px; box-shadow: 0 18px 40px rgba(0,0,0,0.15); padding: 1rem; transform-origin: bottom right; opacity:0; pointer-events:none; transform: translateY(6px) scale(.98); transition: opacity .22s ease, transform .22s cubic-bezier(.2,.9,.3,1); z-index:100 }
+.help-popup.open{ opacity:1; pointer-events:auto; transform: translateY(0) scale(1); }
+
+.help-card{ display:flex; flex-direction:column; gap:8px; padding:10px; }
+.help-header{ display:flex; justify-content:space-between; align-items:center; }
+.help-title{ margin:0; color:var(--brand-maroon); font-size:1rem; font-weight:700; }
+.help-close{ background:#fff; border:1px solid rgba(0,0,0,0.06); padding:4px 6px; border-radius:6px; font-size:0.95rem; cursor:pointer; color: var(--brand-maroon); }
+.help-body{ color:#3b3030; font-size:0.9rem; }
+.help-list{ padding-left:1.1rem; margin:0.4rem 0 0 0.2rem; }
+.help-done{ background:var(--brand-maroon); color:white; padding:0.45rem 0.7rem; border-radius:6px; border:none; cursor:pointer; }
+
+/* place popup visually above footer and aligned near left of page footer area */
+.help-popup{ right: 32px; bottom: 250px; z-index:100 }
+
+.hero-pill{ display: none; }
+
+/* keep previous logo/footer styles */
 
 .logoLetterWrap{
     display: flex;
@@ -95,6 +288,13 @@ button.cameraButton img{
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
+/* helper logo hover effect: light up like the main logo */
+.help-button img:hover{
+  filter: drop-shadow(0 0 2em #8F002D);
+  transform: translateY(-2px) scale(1.03);
+  transition: transform .22s ease, filter .22s ease;
+}
+
 /* Footer logo hover effect (reuses the drop-shadow style from .logo) */
 .footer-logo {
   display: flex;
@@ -142,3 +342,23 @@ button.cameraButton img{
 .read-the-docs {
   color: #888;
 }
+
+.polaroid-section-outer{ /* nudge the polaroid down a bit to match screenshot */
+  margin-top: 36px;
+}
+
+/* push the polaroid column to the right edge of the container and align vertically */
+.polaroid-section{
+  position: absolute; /* pin inside hero-panel */
+  right: 64px; /* distance from the pink panel right edge */
+  top: 36px; /* move polaroid up so it doesn't overflow bottom */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 30;
+}
+
+.polaroid-desc{ color: #8b2b2b; font-size: 0.85rem; margin-top: 8px }
+
+/* description positioned inside white polaroid frame bottom area */
+.polaroid-frame .polaroid-desc{ position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%); width: 80%; text-align: center; color: #6b3b3b; font-size: 0.9rem }
