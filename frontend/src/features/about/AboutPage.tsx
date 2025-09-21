@@ -1,4 +1,4 @@
-import Footer from '../../components/Footer'
+// Footer is rendered at the app root (`App.tsx`) so it is positioned consistently at the bottom.
 import { useState } from 'react'
 import ContactModal from '../../components/ContactModal'
 
@@ -10,11 +10,12 @@ export default function AboutPage({ onNavigateHome }: AboutPageProps) {
   const [contactOpen, setContactOpen] = useState(false)
   const [contactRecipient, setContactRecipient] = useState<string | undefined>(undefined)
   const team = [
-      { name: 'Chris Ho', role: 'API Integration and Frontend', bio: 'Implemented API to create meaningful features', avatar: 'src/assets/Chris.jpg' },
-      { name: 'Anakin Maksylewicz', role: 'Frontend', bio: 'Designed the letter page and created animations', avatar: 'src/assets/Anakin.jpg' },
-      { name: 'Reese Odvina', role: 'Design UI/UX', bio: "Created assets and designed the website", avatar: 'src/assets/Reese.jpg' },
-      { name: 'Kevin Trinh', role: 'Backend', bio: 'Set up the OAuth backend utilizing the firebase service', avatar: 'src/assets/kevin.jpg' },
+    { name: 'Chris Ho', role: 'API Integration and Frontend', bio: 'Implemented API to create meaningful features', avatar: 'src/assets/Chris.jpg' },
+      { name: 'Anakin Maksylewicz', role: 'Frontend', bio: 'Designed the letter page and animations', avatar: 'src/assets/Anakin.jpg' },
+    { name: 'Reese Odvina', role: 'Design UI/UX', bio: "Created assets and designed the website", avatar: 'src/assets/Reese.jpg' },
+    { name: 'Kevin Trinh', role: 'Backend', bio: 'Set up the OAuth backend utilizing the firebase service', avatar: 'src/assets/kevin.jpg' },
   ]
+
   return (
     <main className="w-full bg-[#E7C9A9]">
       <div className="py-10 px-6 bg-[#E7C9A9]">
@@ -48,7 +49,7 @@ export default function AboutPage({ onNavigateHome }: AboutPageProps) {
           <div className="bg-white/75 backdrop-blur-sm rounded-2xl p-8 shadow-md border border-white/20 flex flex-col justify-between">
             <div>
               <h3 className="font-bold text-red-400 mb-3 text-xl">Why Letter2You?</h3>
-              <p className="mt-2 text-[#3b2a2a]">Because small gestures matter. A handwritten-style note can brighten someone's day — we help you do that without friction and have a customizable photo in your message. Simply type in whatever message you want to convey, have the option to take a picture/polaroid, and customize it to your desire! </p>
+              <p className="mt-2 text-[#3b2a2a]">Because small gestures matter. A handwritten-style note can brighten someone's day — we help you do that without friction and have a customizable photo in your message.</p>
             </div>
             <div className="mt-6 flex justify-start">
               <button
@@ -75,8 +76,8 @@ export default function AboutPage({ onNavigateHome }: AboutPageProps) {
                   </div>
 
                   <div className="flex-1 flex flex-col items-center justify-center px-4">
-                    <h3 className="text-2xl md:text-3xl font-semibold mt-2 text-[#3b2a2a]">{m.name}</h3>
-                    <div className="text-base text-[#3b2a2a]">{m.role}</div>
+                  <h3 className="text-2xl md:text-3xl font-semibold mt-2 text-[#3b2a2a]">{m.name}</h3>
+                  <div className="text-base text-[#3b2a2a]">{m.role}</div>
                     <p className="mt-4 text-base text-[#3b2a2a] max-w-lg">{m.bio}</p>
                     <div className="mt-6">
                       <button
@@ -96,7 +97,6 @@ export default function AboutPage({ onNavigateHome }: AboutPageProps) {
         </section>
 
       </div>
-      <Footer />
       <ContactModal open={contactOpen} onClose={() => setContactOpen(false)} recipient={contactRecipient} />
     </main>
   )
