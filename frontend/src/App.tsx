@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, use } from 'react'
 import littleGuy from './assets/littleGuy.png'
 import micIcon from './assets/microphone.png'
 import sparkleImg from './assets/sparkle-stars-white-png.webp'
@@ -22,7 +22,8 @@ import './App.css'
 function App() {
   const [view, setView] = useState<'home' | 'about' | 'signup'>('home')
   const [helpOpen, setHelpOpen] = useState(false)
-  const letterRef = useRef<any | null>(null) 
+  const letterRef = useRef<any | null>(null)
+  const [showAssistant, setShowAssistant] = useState(false)
 
   const [user, setUser] = useState<User | null>(null)
 
@@ -78,14 +79,14 @@ function App() {
 
       <div className="pt-16" /> {/* spacing to account for fixed navbar */}
 
-      <main className="flex-1 flex items-center justify-center">
+      <main className="flex-1 flex items-center justify-center mb-8">
         <div className="page">
           <div className="logoLetterWrap flex flex-col items-start">
             <div className="hero-panel">
               <div className="hero-pill" />
 
               <div className="left-controls">
-                <button className="control-btn" title="Sparkle" aria-label="Sparkle">
+                <button className="control-btn" title="AI-Assistant" aria-label="AI-Assistant" onClick={() => setShowAssistant(true)}>
                   <img src={sparkleImg} alt="sparkle" />
                 </button>
                 <button className="control-btn" title="Voice" aria-label="Voice" onClick={() => (letterRef.current as any)?.toggleMic()}>
@@ -101,8 +102,9 @@ function App() {
                   </div>
                 </div>
 
-                <div className="polaroid-section flex flex-col items-center gap-1">
+                <div className="polaroid-section flex justify-center flex-col items-center gap-9">
                   <PolaroidPreview />
+                  <input type="email" className="email-input w-full text-[#8b2b2b] text-center bg-[#ffffff] rounded-[6px]" placeholder="Enter email to send to" />
                 </div>
               </div>
 
@@ -118,10 +120,6 @@ function App() {
                 </div>
               </div>
             </div>
-          </div>
-
-          <div className="buttonWrap">
-            {/* placeholder for any extra buttons */}
           </div>
         </div>
       </main>
