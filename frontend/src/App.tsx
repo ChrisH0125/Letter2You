@@ -5,11 +5,12 @@ import LetterForm from './features/letters/LetterForm'
 import cameraIcon from './assets/cameraIcon.png'
 import AboutPage from './features/about/AboutPage'
 import Footer from './components/Footer'
+import SignUp from './features/auth/SignUp'
 
 import './App.css'
 
 function App() {
-  const [view, setView] = useState<'home' | 'about'>('home')
+  const [view, setView] = useState<'home' | 'about' | 'signup'>('home')
 
   if (view === 'about') {
     return (
@@ -25,12 +26,34 @@ function App() {
     )
   }
 
+  if (view === 'signup') {
+  return (
+    <div className="min-h-screen flex flex-col">
+      <div className="p-4 flex justify-start">
+        <button
+          className="px-3 py-2 rounded bg-gray-200"
+          onClick={() => setView('home')}
+        >
+          ◀ Back
+        </button>
+      </div>
+      <div className="flex-1 flex items-center justify-center w-full">
+        <SignUp />
+      </div>
+      <Footer />
+    </div>
+  )
+}
+
+
   return (
     <div className="min-h-screen flex flex-col">
       {/* Quick About button for testing navigation */}
       <div className="p-4 flex justify-end">
         <button className="px-3 py-2 rounded bg-pink-500 text-white" onClick={() => setView('about')}>About</button>
       </div>
+
+      <button className="px-3 py-2 rounded bg-blue-500 text-white" onClick={() => setView('signup')}>Sign Up</button>
 
       <div className="flex-1 flex items-center justify-center">
         <div className="page">
