@@ -89,7 +89,7 @@ export default function PolaroidPreview(){
           ) : (
             <div className="flex flex-col items-center justify-center text-center text-[#2B1917] p-4">
               <img src={littleGuy} alt="placeholder" className="w-28 h-28 object-contain mb-2" />
-              <div className="text-sm text-red-400">No photo yet</div>
+              <div className="text-sm text-red-400">No photo yet!</div>
             </div>
           )}
         </div>

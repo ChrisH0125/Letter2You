@@ -1,6 +1,10 @@
-export default function Footer() {
-	return (
-		<footer className="bg-[#2b2436] text-gray-200 footer-root">
+type FooterProps = {
+	onNavigateAbout?: () => void;
+}
+
+export default function Footer({ onNavigateAbout }: FooterProps) {
+		return (
+				<footer className="bg-[#2b2436] text-gray-200 footer-root">
 					<div className="max-w-screen-xl mx-auto px-6 py-10">
 						<div className="grid grid-cols-1 md:grid-cols-4 gap-8 items-start py-8">
 							<div className="flex flex-col items-start">
@@ -17,9 +21,9 @@ export default function Footer() {
 					<div>
 						<h4 className="text-sm font-semibold mb-3 text-gray-200 uppercase">About</h4>
 												<ul className="space-y-2 text-sm">
-													<li><a href="#" className="text-red-400 hover:text-red-300 hover:underline">About</a></li>
-													<li><a href="#" className="text-red-400 hover:text-red-300 hover:underline">Contact us</a></li>
-												</ul>
+																			<li><a href="#" onClick={(e) => { e.preventDefault(); if (onNavigateAbout) onNavigateAbout(); }} className="text-red-400 hover:text-red-300 hover:underline">About</a></li>
+																			<li><a href="#" className="text-red-400 hover:text-red-300 hover:underline">Contact us</a></li>
+																		</ul>
 					</div>
 
 					<div>
