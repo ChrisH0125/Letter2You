@@ -16,7 +16,7 @@ function App() {
           <button className="px-3 py-2 rounded bg-gray-200" onClick={() => setView('home')}>◀ Back</button>
         </div>
         <div className="flex-1 flex w-full">
-          <AboutPage />
+          <AboutPage onNavigateHome={() => setView('home')} />
         </div>
       </div>
     )
