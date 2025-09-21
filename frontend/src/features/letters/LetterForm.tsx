@@ -1,5 +1,5 @@
 import { useState, useRef, forwardRef, useImperativeHandle } from "react";
-import { db } from "../../firebaseClient";
+import { db, auth } from "../../firebaseClient";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
 function LetterForm(_props: any, ref: any) {
@@ -10,11 +10,21 @@ function LetterForm(_props: any, ref: any) {
   const recognitionRef = useRef<any | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+    e.preventDefault(); // prevent page reload
+    const user = auth.currentUser;
+
+    if (!user) {
+      alert("You must be signed in to send a letter."); 
+      return; 
+    } 
+
     try {
       await addDoc(collection(db, "letters"), {
-        message,
-        createdAt: serverTimestamp(),
+        uid: user.uid, 
+        email: user.email,
+        text: message,
+        createdAt: serverTimestamp(), 
+        scheduledAt: Date.now() + 3 * 60 * 1000, 
       });
       setStatus("Letter saved!");
       setMessage("");
@@ -88,7 +98,7 @@ function LetterForm(_props: any, ref: any) {
         value={message + interim}
         onChange={(e) => { setMessage(e.target.value); setInterim(""); }}
         required
-      />
+      /> 
 
       <div className="flex items-center justify-start mt-2 gap-3">
         {status && <p className="text-gray-700">{status}</p>}
