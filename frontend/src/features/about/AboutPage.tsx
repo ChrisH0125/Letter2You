@@ -1,13 +1,20 @@
 import Footer from '../../components/Footer'
+import { useState } from 'react'
+import ContactModal from '../../components/ContactModal'
 
-export default function AboutPage() {
+type AboutPageProps = {
+  onNavigateHome?: () => void
+}
+
+export default function AboutPage({ onNavigateHome }: AboutPageProps) {
+  const [contactOpen, setContactOpen] = useState(false)
+  const [contactRecipient, setContactRecipient] = useState<string | undefined>(undefined)
   const team = [
       { name: 'Chris Ho', role: 'API Integration and Frontend', bio: 'Implemented API to create meaningful features', avatar: 'src/assets/Chris.jpg' },
       { name: 'Anakin Maksylewicz', role: 'Frontend', bio: 'Designed the letter page and created animations', avatar: 'src/assets/Anakin.jpg' },
       { name: 'Reese Odvina', role: 'Design UI/UX', bio: "Created assets and designed the website", avatar: 'src/assets/Reese.jpg' },
       { name: 'Kevin Trinh', role: 'Backend', bio: 'Set up the OAuth backend utilizing the firebase service', avatar: 'src/assets/kevin.jpg' },
   ]
-
   return (
     <main className="w-full bg-[#E7C9A9]">
       <div className="py-10 px-6 bg-[#E7C9A9]">
@@ -44,7 +51,15 @@ export default function AboutPage() {
               <p className="mt-2 text-[#3b2a2a]">Because small gestures matter. A handwritten-style note can brighten someone's day — we help you do that without friction and have a customizable photo in your message. Simply type in whatever message you want to convey, have the option to take a picture/polaroid, and customize it to your desire! </p>
             </div>
             <div className="mt-6 flex justify-start">
-              <button className="px-4 py-2 bg-pink-500 text-white rounded-full shadow hover:bg-pink-600">Try it out!</button>
+              <button
+                className="px-4 py-2 bg-pink-500 text-white rounded-full shadow hover:bg-pink-600"
+                onClick={() => {
+                  if (onNavigateHome) onNavigateHome()
+                  else window.location.href = '/'
+                }}
+              >
+                Try it out!
+              </button>
             </div>
           </div>
         </section>
@@ -64,7 +79,12 @@ export default function AboutPage() {
                     <div className="text-base text-[#3b2a2a]">{m.role}</div>
                     <p className="mt-4 text-base text-[#3b2a2a] max-w-lg">{m.bio}</p>
                     <div className="mt-6">
-                      <button className="px-6 py-3 bg-blue-600 text-white rounded-full text-sm md:text-base">Contact Me</button>
+                      <button
+                        className="px-6 py-3 bg-blue-600 text-white rounded-full text-sm md:text-base"
+                        onClick={() => { setContactRecipient(m.name); setContactOpen(true) }}
+                      >
+                        Contact Me
+                      </button>
                     </div>
                   </div>
 
@@ -77,6 +97,7 @@ export default function AboutPage() {
 
       </div>
       <Footer />
+      <ContactModal open={contactOpen} onClose={() => setContactOpen(false)} recipient={contactRecipient} />
     </main>
   )
 }
