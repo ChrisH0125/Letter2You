@@ -23,7 +23,6 @@
   --brand-pink: #F6D6DA;
   --panel-pink: #F8DBDF;
   --cream-bg: #FBF6F4;
-  --muted: #EDEDED;
 }
 
 body, #root {
@@ -63,8 +62,8 @@ body, #root {
 }
 
 .control-btn{
-  width: 78px;
-  height: 78px;
+  width: 74px;
+  height: 74px;
   border-radius: 50%;
   background: var(--brand-maroon);
   color: white;
@@ -79,7 +78,7 @@ body, #root {
 
 .control-btn svg, .control-btn img{ width: 40px !important; height: 40px !important; object-fit: contain; display:block; }
 .control-btn svg { display: block; }
-.control-btn{ font-size: 1.6rem }
+.control-btn{ font-size: 0.5rem }
 
 .letter-area {
   display: flex;
@@ -174,8 +173,9 @@ body, #root {
   padding: 0;
 }
 
-/* hide send button while camera modal or description input is shown so it doesn't overlap */
+/* hide send button and email input while camera modal or description input is shown so it doesn't overlap */
 body.polaroid-modal-open .send-row{ display: none !important }
+body.polaroid-modal-open .email-input{ display: none !important }
 
 .footer-bar{
   background: #e9e9e9;

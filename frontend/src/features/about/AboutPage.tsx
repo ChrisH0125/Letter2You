@@ -17,8 +17,8 @@ export default function AboutPage({ onNavigateHome }: AboutPageProps) {
   ]
 
   return (
-    <main className="w-full bg-[#E7C9A9]">
-      <div className="py-10 px-6 bg-[#E7C9A9]">
+    <main className="w-full bg-[#FFFDF6]">
+      <div className="py-10 px-6 bg-[#FBF6F4]">
 
         <section className="text-center mb-10">
           <h2 className="text-5xl md:text-6xl font-extrabold font-bold text-lg text-red-400">About Letter2You</h2>
@@ -26,7 +26,7 @@ export default function AboutPage({ onNavigateHome }: AboutPageProps) {
         </section>
 
         <section className="grid md:grid-cols-2 gap-8 items-start mb-10">
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-white/30">
+          <div className="bg-[#F8DBDF] backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-white/30">
             <h2 className="text-2xl font-bold text-red-400 mb-3">Our mission</h2>
             <p className="mt-2 text-[#3b2a2a]">To reconnect people through thoughtful, tangible messages. We combine simple tools with beautiful designs so anyone can send a letter that feels personal.</p>
 
@@ -46,7 +46,7 @@ export default function AboutPage({ onNavigateHome }: AboutPageProps) {
             </ul>
           </div>
 
-          <div className="bg-white/75 backdrop-blur-sm rounded-2xl p-8 shadow-md border border-white/20 flex flex-col justify-between">
+          <div className="bg-[#F8DBDF] backdrop-blur-sm rounded-2xl p-8 shadow-md border border-white/20 flex flex-col justify-between">
             <div>
               <h3 className="font-bold text-red-400 mb-3 text-xl">Why Letter2You?</h3>
               <p className="mt-2 text-[#3b2a2a]">Because small gestures matter. A handwritten-style note can brighten someone's day — we help you do that without friction and have a customizable photo in your message.</p>
@@ -70,7 +70,7 @@ export default function AboutPage({ onNavigateHome }: AboutPageProps) {
           <div className="mx-auto grid gap-20 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 mt-16 max-w-6xl justify-center">
             {team.map((m) => (
               <div key={m.name} className="relative w-full flex">
-                <div className="flex-1 max-w-xl w-full mx-auto border rounded-3xl p-12 bg-gradient-to-b from-white to-pink-50 shadow-2xl text-center overflow-visible flex flex-col items-center" style={{ minHeight: 420 }}>
+                <div className="flex-1 max-w-xl w-full mx-auto border rounded-3xl p-12 bg-[#F8DBDF] shadow-2xl text-center overflow-visible flex flex-col items-center" style={{ minHeight: 420 }}>
                   <div className="-mt-24 mb-6 flex justify-center">
                     <img src={m.avatar} alt={m.name} className="h-48 w-48 rounded-full border-4 border-white shadow-lg object-cover" />
                   </div>
