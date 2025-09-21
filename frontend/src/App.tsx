@@ -5,8 +5,10 @@ import LetterForm from './features/letters/LetterForm'
 import cameraIcon from './assets/cameraIcon.png'
 import microphoneIcon from './assets/microphoneIcon.png'
 import AboutPage from './features/about/AboutPage'
+import Footer from './components/Footer'
 
 import './App.css'
+
 function App() {
   const [view, setView] = useState<'home' | 'about'>('home')
 
@@ -19,6 +21,7 @@ function App() {
         <div className="flex-1 flex w-full">
           <AboutPage onNavigateHome={() => setView('home')} />
         </div>
+        <Footer />
       </div>
     )
   }
@@ -30,6 +33,7 @@ function App() {
         <button className="px-3 py-2 rounded bg-pink-500 text-white" onClick={() => setView('about')}>About</button>
       </div>
 
+      <div className="flex-1 flex items-center justify-center">
         <div className="page">
           <div className="logoLetterWrap flex flex-col items-start">
             <div className="logo flex flex-col items-start">
@@ -55,9 +59,16 @@ function App() {
             </div>
           </div>
 
+          <div className="buttonWrap">
+            {/* Figure out a way to send letter to backend, probably something like
+            adding an onClick attribute to this button and then creating a function
+            that sends letter to backend */}
+            
+          </div>
         </div>
-
       </div>
+      <Footer />
+    </div>
   )
 }
 
