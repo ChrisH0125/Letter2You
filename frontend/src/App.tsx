@@ -3,6 +3,7 @@ import littleGuy from './assets/littleGuy.png'
 import PolaroidPreview from './components/PolaroidPreview'
 import LetterForm from './features/letters/LetterForm'
 import cameraIcon from './assets/cameraIcon.png'
+import microphoneIcon from './assets/microphoneIcon.png'
 import AboutPage from './features/about/AboutPage'
 
 import './App.css'
@@ -47,20 +48,13 @@ function App() {
               </div>
               
               {/* Polaroid section - separate from letter */}
-              <div className="polaroid-section">
+              <div className="polaroid-section flex flex-col items-center gap-1">
+                <button className='cameraButton block mt-0 mb-0 ml-auto mr-auto'><img src={cameraIcon} alt="camera button"/></button>
                 <PolaroidPreview/>
               </div>
             </div>
           </div>
 
-          <div className="buttonWrap">
-            {/* Figure out a way to send letter to backend, probably something like
-            adding an onClick attribute to this button and then creating a function
-            that sends letter to backend */}
-
-            {/* Make camera button take picture of you and store that image somewhere, pass to PolaroidPreview function */}
-            <button className="cameraButton"> <img src={cameraIcon}></img> </button>
-          </div>
         </div>
 
       </div>
