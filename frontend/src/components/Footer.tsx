@@ -1,7 +1,7 @@
 export default function Footer() {
 	return (
 		<footer className="bg-[#2b2436] text-gray-200 footer-root">
-					<div className=" mx-auto px-6 py-10">
+					<div className="max-w-screen-xl mx-auto px-6 py-10">
 						<div className="grid grid-cols-1 md:grid-cols-4 gap-8 items-start py-8">
 							<div className="flex flex-col items-start">
 								<div className="flex items-center gap-3 mb-3">

@@ -27,7 +27,7 @@ export default function LetterForm() {
 
   return (
     <form 
-      className="p-4 w-[500px] h-[400px] border rounded bg-[#2B1917]" 
+      className="p-4 w-[26vw] h-[40vh] border rounded bg-[#2B1917]" 
       onSubmit={handleSubmit}  // form submission triggers Firestore save
     >
       <textarea
