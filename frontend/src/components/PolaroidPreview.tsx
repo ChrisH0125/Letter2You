@@ -2,7 +2,7 @@ import littleGuy from '../assets/littleGuy.png'
 // placeholder image, remove when we figure out how to pass images
 export default function PolaroidPreview(){
   return (
-    <div className="bg-white w-30 h-35 p-2 flex flex-col items-center relative"> 
+    <div className="bg-white w-[calc(26vw*0.5)] h-[calc(26vw*0.6)] p-2 flex flex-col items-center relative"> 
       {/* six seven */}
       <div className = "bg-black w-6/7 h-6/7 flex items-center justify-center">
         {/* Bottom line is a placeholder for the image variable that'll be passed in*/}

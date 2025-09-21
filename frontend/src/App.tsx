@@ -29,23 +29,25 @@ function App() {
         <button className="px-3 py-2 rounded bg-pink-500 text-white" onClick={() => setView('about')}>About</button>
       </div>
 
-      {/* Main content centered in viewport */}
-      <div className="flex-1 flex items-center justify-center">
         <div className="page">
-          <div className="logoLetterWrap">
-            <div className="logo">
-              <img src={littleGuy} alt="logo" /> {/*Placeholder logo (unless we want to keep him)*/}
-              <h1 className="text-center font-bold text-[#8F002D]">Letter2You</h1>
+          <div className="logoLetterWrap flex flex-col items-start">
+            <div className="logo flex flex-col items-start">
+              <img src={littleGuy} alt="logo" style={{ width: '8vw', height: 'auto', minWidth: '80px', maxWidth: '150px' }} /> {/*Placeholder logo (unless we want to keep him)*/}
+              <h1 className="text-left font-bold text-[#8F002D]" style={{ fontSize: '2.5vw' }}>Letter2You</h1>
             </div>
 
-            <div className="letterWrap">
-              <LetterForm/>
-              <div className="watermark">
-                <img src={littleGuy} alt="watermark logo" className="watermark-img" />
+            {/* Container for letter and polaroid side by side */}
+            <div className="letter-polaroid-container flex flex-row items-center gap-24">
+              {/* Letter box with watermark */}
+              <div className="letter-section relative">
+                <LetterForm/>
+                <div className="watermark">
+                  <img src={littleGuy} alt="watermark logo" className="watermark-img" />
+                </div>
               </div>
-
-              <div className="polaroid">
-                {/* Pass photo from camera button into this function */}
+              
+              {/* Polaroid section - separate from letter */}
+              <div className="polaroid-section">
                 <PolaroidPreview/>
               </div>
             </div>
@@ -60,8 +62,8 @@ function App() {
             <button className="cameraButton"> <img src={cameraIcon}></img> </button>
           </div>
         </div>
+
       </div>
-    </div>
   )
 }
 
