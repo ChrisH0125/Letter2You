@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { db } from "../../firebaseClient";
+import { db, auth } from "../../firebaseClient";
 import microphoneIcon from '../../assets/microphoneIcon.png'
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
@@ -14,11 +14,19 @@ export default function LetterForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault(); // prevent page reload
-
+    const user = auth.currentUser; 
+    if (!user) {
+      alert("You must be signed in to send a letter."); 
+      return; 
+    }
+    
     try {
       await addDoc(collection(db, "letters"), {
-        message,
-        createdAt: serverTimestamp(),
+        uid: user.uid, 
+        email: user.email,
+        text: message,
+        createdAt: serverTimestamp(), 
+        scheduledAt: Date.now() + 3 * 60 * 1000, 
       });
 
       setStatus("Letter saved!");
