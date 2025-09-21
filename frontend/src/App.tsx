@@ -27,6 +27,24 @@ function App() {
 
   const [user, setUser] = useState<User | null>(null)
 
+  // Delay dropdown state
+  const [showDelayDropdown, setShowDelayDropdown] = useState(false)
+  const [selectedDelay, setSelectedDelay] = useState({ label: 'Send now', value: 0 })
+
+  const delayOptions = [
+    { label: 'Send now', value: 0 },
+    { label: '1 minute', value: 1 * 60 * 1000 },
+    { label: '1 month', value: 30 * 24 * 60 * 60 * 1000 },
+    { label: '1 year', value: 365 * 24 * 60 * 60 * 1000 },
+    { label: '3 years', value: 3 * 365 * 24 * 60 * 60 * 1000 },
+    { label: '5 years', value: 5 * 365 * 24 * 60 * 60 * 1000 }
+  ]
+
+  const selectDelay = (option: { label: string, value: number }) => {
+    setSelectedDelay(option)
+    setShowDelayDropdown(false)
+  }
+
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
@@ -109,6 +127,29 @@ function App() {
               </div>
 
               <div className="send-row" style={{ marginTop: 16, display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: 16 }}>
+                <div className="relative">
+                  {/* LETTER SEND DROPDOWN */}
+                  <button 
+                    onClick={() => setShowDelayDropdown(!showDelayDropdown)}
+                    className="px-4 py-2 bg-[#F6D6DA] text-white rounded-lg border border-[#8F002D] flex items-center gap-2"
+                  >
+                    {selectedDelay.label} 
+                    <span className={`transform transition-transform duration-200 ${showDelayDropdown ? 'rotate-180' : ''}`}>▼</span>
+                  </button>
+                  {showDelayDropdown && (
+                    <div className="absolute bottom-full mb-2 right-0 bg-white border border-gray-200 rounded-lg shadow-lg min-w-[140px] z-50">
+                      {delayOptions.map((option) => (
+                        <div 
+                          key={option.value}
+                          onClick={() => selectDelay(option)}
+                          className="px-4 py-2 hover:bg-[#F8DBDF] cursor-pointer text-[#8F002D] first:rounded-t-lg last:rounded-b-lg"
+                        >
+                          {option.label}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
                 <button className="send-btn" onClick={() => (document.getElementById('letter-form') as HTMLFormElement | null)?.requestSubmit()}>Send</button>
               </div>
 
