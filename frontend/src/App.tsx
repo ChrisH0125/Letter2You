@@ -121,7 +121,9 @@ function App() {
                 </div>
 
                 <div className="polaroid-section flex justify-center flex-col items-center gap-9">
-                  <PolaroidPreview />
+                  <div className="hover:scale-105 hover:shadow-xl transition-all duration-300">
+                    <PolaroidPreview />
+                  </div>
                   <input type="email" className="email-input w-full text-[#8b2b2b] text-center bg-[#ffffff] rounded-[6px]" placeholder="Enter email to send to" />
                 </div>
               </div>
@@ -150,6 +152,7 @@ function App() {
                     </div>
                   )}
                 </div>
+                {/* selectedDelay has TWO components, a string label e.g. "send now, 5 minutes" and a value in milliseconds */}
                 <button className="send-btn" onClick={() => (document.getElementById('letter-form') as HTMLFormElement | null)?.requestSubmit()}>Send</button>
               </div>
 
