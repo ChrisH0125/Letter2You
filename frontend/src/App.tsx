@@ -76,7 +76,6 @@ function App() {
               
               {/* Polaroid section - separate from letter */}
               <div className="polaroid-section flex flex-col items-center gap-1">
-                <button className='cameraButton block mt-0 mb-0 ml-auto mr-auto'><img src={cameraIcon} alt="camera button"/></button>
                 <PolaroidPreview/>
               </div>
             </div>
