@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import littleGuy from './assets/littleGuy.png'
 import micIcon from './assets/microphone.png'
 import sparkleImg from './assets/sparkle-stars-white-png.webp'
@@ -12,7 +12,8 @@ import Navbar from './components/Navbar'
 import HelpPopup from './components/HelpPopup'
 // firebase 
 import { auth } from "./firebaseClient";
-import { signOut } from 'firebase/auth';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
+import type { User } from 'firebase/auth';
 
 signOut(auth).catch((err) => console.error("Error signing out on startup:", err));
 
@@ -21,12 +22,25 @@ import './App.css'
 function App() {
   const [view, setView] = useState<'home' | 'about' | 'signup'>('home')
   const [helpOpen, setHelpOpen] = useState(false)
-  const letterRef = useRef<any | null>(null)
+  const letterRef = useRef<any | null>(null) 
 
+  const [user, setUser] = useState<User | null>(null)
+
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
+      setUser(firebaseUser)
+    })
+    return () => unsubscribe()
+  }, [])
+ 
   if (view === 'about') {
     return (
       <div className="min-h-screen flex flex-col">
-        <Navbar view={view} setView={setView} />
+        <Navbar view={view} setView={setView} user={user} onLogout={() => {
+          signOut(auth);
+          setView("home");
+        }}/>
         <div className="pt-16 flex-1 flex w-full">{/* pt-16 to offset fixed navbar height */}
           <AboutPage onNavigateHome={() => setView('home')} />
         </div>
@@ -36,28 +50,31 @@ function App() {
   }
 
   if (view === 'signup') {
-  return (
-    <div className="min-h-screen flex flex-col">
-      <div className="p-4 flex justify-start">
-        <button
-          className="px-3 py-2 rounded bg-gray-200"
-          onClick={() => setView('home')}
-        >
-          ◀ Back
-        </button>
+    return (
+      <div className="min-h-screen flex flex-col">
+        <div className="p-4 flex justify-start">
+          <button
+            className="px-3 py-2 rounded bg-gray-200"
+            onClick={() => setView('home')}
+          >
+            ◀ Back
+          </button>
+        </div>
+        <div className="flex-1 flex items-center justify-center w-full">
+          <SignUp />
+        </div>
+        <Footer onNavigateAbout={() => setView('about')} />
       </div>
-      <div className="flex-1 flex items-center justify-center w-full">
-        <SignUp />
-      </div>
-  <Footer onNavigateAbout={() => setView('about')} />
-    </div>
-  )
-}
+    )
+  }
 
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Navbar view={view} setView={setView} />
+        <Navbar view={view} setView={setView} user={user} onLogout={() => {
+          signOut(auth);
+          setView("home");
+        }}/>      
 
       <div className="pt-16" /> {/* spacing to account for fixed navbar */}
 

@@ -4,9 +4,10 @@ import littleGuy from '../assets/littleGuy.png'
 type NavbarProps = {
   view: "home" | "about" | "signup";
   setView: (view: "home" | "about" | "signup") => void;
+  user: import("firebase/auth").User | null;
+  onLogout: () => void;
 };
-
-export default function Navbar({ view, setView }: NavbarProps) {
+export default function Navbar({ view, setView, user, onLogout }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
   void view;
 
@@ -47,6 +48,23 @@ export default function Navbar({ view, setView }: NavbarProps) {
         >
           About
         </span>
+        {user ? (
+        <span
+          onClick={onLogout}
+          style={{
+            backgroundColor: "#8F002D",
+            color: "white",
+            padding: "8px 12px",
+            borderRadius: "4px",
+            fontSize: "1.45rem",
+            cursor: "pointer",
+            lineHeight: "1",
+          }}
+          className="hover:opacity-80 transition"
+        >
+          Log Out
+        </span>
+      ) : (
         <span
           onClick={() => setView("signup")}
           style={{
@@ -58,10 +76,11 @@ export default function Navbar({ view, setView }: NavbarProps) {
             cursor: "pointer",
             lineHeight: "1",
           }}
-          className= "hover:opacity-80 transition"
+          className="hover:opacity-80 transition"
         >
           Login / Sign Up
         </span>
+      )}
       </div>
 
       {/* Mobile Hamburger */}
