@@ -114,7 +114,7 @@ function LetterForm(_props: any, ref: any) {
 
       {status && (
         <div
-          className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#8F002D] text-white px-6 py-3 rounded shadow-lg opacity-90 z-50 transition-opacity duration-500"
+          className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#8F002D] text-white px-6 py-3 rounded shadow-lg opacity-90 z-50 animate-bounce transition-opacity duration-500"
         >
           {status}
         </div>
