@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { auth } from "../../firebaseClient";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword,
+         signInWithEmailAndPassword,
+} from "firebase/auth";
 
 export default function SignUp() {
+  const [isLogin, setIsLogin] = useState(false); // toggle between signup/login
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -14,7 +17,11 @@ export default function SignUp() {
     setSuccess(false);
 
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
+        if (isLogin) {
+            await signInWithEmailAndPassword(auth, email, password);
+        } else {
+            await createUserWithEmailAndPassword(auth, email, password); 
+        }
       setSuccess(true);
     } catch (err: any) {
       setError(err.message);
@@ -51,11 +58,30 @@ export default function SignUp() {
           type="submit"
           className="w-full bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded"
         >
-          Sign Up
+          {isLogin ? "Login" : "Sign Up"}
         </button>
 
         {error && <p className="text-red-500 mt-3 text-sm">{error}</p>}
-        {success && <p className="text-green-500 mt-3 text-sm">Account created!</p>}
+        {success && (<p className="text-green-500 mt-3 text-sm">
+            {isLogin ? "Logged in!" : "Account created!"}
+        </p>)}
+
+        {/* Toggle link */}
+        <p className="mt-4 text-center text-sm text-pink-700">
+          {isLogin
+            ? "Don't have an account? "
+            : "Already have an account? "}
+          <span
+            className="text-pink-700 cursor-pointer hover:underline"
+            onClick={() => {
+              setIsLogin(!isLogin);
+              setError(null);
+              setSuccess(false);
+            }}
+          >
+            {isLogin ? "Sign Up" : "Login"}
+          </span>
+        </p>
       </form>
     </div>
   );
