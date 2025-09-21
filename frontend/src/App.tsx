@@ -55,7 +55,7 @@ function App() {
             {/* Figure out a way to send letter to backend, probably something like
             adding an onClick attribute to this button and then creating a function
             that sends letter to backend */}
-            <button> Send Letter </button>
+
             {/* Make camera button take picture of you and store that image somewhere, pass to PolaroidPreview function */}
             <button className="cameraButton"> <img src={cameraIcon}></img> </button>
           </div>
