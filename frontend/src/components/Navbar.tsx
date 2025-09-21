@@ -1,33 +1,34 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import littleGuy from '../assets/littleGuy.png'
 
 type NavbarProps = {
-  view: "home" | "about" | "login";
-  setView: (view: "home" | "about" | "login") => void;
+  view: "home" | "about" | "signup";
+  setView: (view: "home" | "about" | "signup") => void;
 };
 
 export default function Navbar({ view, setView }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
+  void view;
 
   return (
     <div className="w-full flex justify-between items-center px-4 py-2 fixed top-0 left-0 z-50">
       {/* Logo */}
-<div
-  className="flex items-center cursor-pointer"
-  onClick={() => setView("home")}
->
-  <img
-    src={littleGuy} // make sure you import littleGuy at the top
-    alt="logo"
-    className="w-6 h-6 mr-2" // adjust size as needed
-  />
-  <div
-    className="font-bold text-xl"
-    style={{ color: "#8F002D" }}
-  >
-    Letter2You
-  </div>
-</div>
+<div className="group inline-flex items-center gap-1 cursor-pointer" onClick={() => setView("home") }>
+        <a href="#" aria-label="Go to home" className="group inline-flex items-center gap-1 cursor-pointer logo footer-logo" onClick={(e) => { e.preventDefault(); setView("home") }}>
+          <img
+            src={littleGuy}
+            alt="logo"
+            className="w-10 h-10 mr-1 transition transform duration-200 group-hover:scale-105" // preserve size
+          />
+          <span
+            className="font-bold text-4xl transition transform duration-200 ease-out group-hover:scale-105 group-hover:tracking-wider"
+            style={{ color: "#8F002D" }}
+          >
+            Letter2You
+          </span>
+        </a>
+
+      </div>
 
 
       {/* Desktop Links */}
@@ -35,29 +36,29 @@ export default function Navbar({ view, setView }: NavbarProps) {
         <span
           onClick={() => setView("home")}
           style={{ color: "#8F002D", cursor: "pointer" }}
-          className="hover:opacity-70 transition"
+          className="hover:opacity-70 transition text-2xl"
         >
-          Home
+          Demo
         </span>
         <span
           onClick={() => setView("about")}
           style={{ color: "#8F002D", cursor: "pointer" }}
-          className="hover:opacity-70 transition"
+          className="hover:opacity-70 transition text-2xl"
         >
           About
         </span>
         <span
-          onClick={() => setView("login")}
+          onClick={() => setView("signup")}
           style={{
             backgroundColor: "#8F002D",
             color: "white",
             padding: "8px 12px",
             borderRadius: "4px",
-            fontSize: "0.875rem",
+            fontSize: "1.45rem",
             cursor: "pointer",
             lineHeight: "1",
           }}
-          className="hover:opacity-80 transition"
+          className= "hover:opacity-80 transition"
         >
           Login / Sign Up
         </span>
@@ -90,7 +91,7 @@ export default function Navbar({ view, setView }: NavbarProps) {
             About
           </span>
           <span
-            onClick={() => { setView("login"); setIsOpen(false); }}
+            onClick={() => { setView("signup"); setIsOpen(false); }}
             style={{
               backgroundColor: "#8F002D",
               color: "white",

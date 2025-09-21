@@ -7,6 +7,7 @@ import microphoneIcon from './assets/microphoneIcon.png'
 import AboutPage from './features/about/AboutPage'
 import Footer from './components/Footer'
 import SignUp from './features/auth/SignUp'
+import Navbar from './components/Navbar'
 
 import './App.css'
 
@@ -16,13 +17,11 @@ function App() {
   if (view === 'about') {
     return (
       <div className="min-h-screen flex flex-col">
-        <div className="p-4 flex justify-end">
-          <button className="px-3 py-2 rounded bg-gray-200" onClick={() => setView('home')}>◀ Back</button>
-        </div>
-        <div className="flex-1 flex w-full">
+        <Navbar view={view} setView={setView} />
+        <div className="pt-16 flex-1 flex w-full">{/* pt-16 to offset fixed navbar height */}
           <AboutPage onNavigateHome={() => setView('home')} />
         </div>
-        <Footer />
+  <Footer onNavigateAbout={() => setView('about')} />
       </div>
     )
   }
@@ -41,7 +40,7 @@ function App() {
       <div className="flex-1 flex items-center justify-center w-full">
         <SignUp />
       </div>
-      <Footer />
+  <Footer onNavigateAbout={() => setView('about')} />
     </div>
   )
 }
@@ -49,19 +48,18 @@ function App() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      {/* Quick About button for testing navigation */}
-      <div className="p-4 flex justify-end">
-        <button className="px-3 py-2 rounded bg-pink-500 text-white" onClick={() => setView('about')}>About</button>
-      </div>
+      <Navbar view={view} setView={setView} />
 
-      <button className="px-3 py-2 rounded bg-blue-500 text-white" onClick={() => setView('signup')}>Sign Up</button>
+      <div className="pt-16" /> {/* spacing to account for fixed navbar */}
 
       <div className="flex-1 flex items-center justify-center">
         <div className="page">
           <div className="logoLetterWrap flex flex-col items-start">
             <div className="logo flex flex-col items-start">
-              <img src={littleGuy} alt="logo" style={{ width: '8vw', height: 'auto', minWidth: '80px', maxWidth: '150px' }} /> {/*Placeholder logo (unless we want to keep him)*/}
-              <h1 className="text-left font-bold text-[#8F002D]" style={{ fontSize: '2.5vw' }}>Letter2You</h1>
+              <a href="#" onClick={(e) => { e.preventDefault(); setView('home') }} className="inline-flex items-center gap-3">
+                <img src={littleGuy} alt="logo" className="brand-animate" style={{ width: '8vw', height: 'auto', minWidth: '80px', maxWidth: '150px' }} /> {/*Placeholder logo (unless we want to keep him)*/}
+                <h1 className="text-left font-bold text-[#8F002D] brand-animate" style={{ fontSize: '2.5vw' }}>Letter2You</h1>
+              </a>
             </div>
 
             {/* Container for letter and polaroid side by side */}
@@ -89,7 +87,7 @@ function App() {
           </div>
         </div>
       </div>
-      <Footer />
+  <Footer onNavigateAbout={() => setView('about')} />
     </div>
   )
 }
