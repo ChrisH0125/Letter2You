@@ -99,7 +99,7 @@ function App() {
 
       <main className="flex-1 flex items-center justify-center mb-8 relative">
         {showAssistant && (
-          <div className="absolute left-8 top-1/2 transform -translate-y-1/2 bg-gray-100 border-2 border-dashed border-gray-300 rounded-lg p-4 w-72 h-80 text-gray-500 z-10">
+          <div className="absolute left-8 top-1/2 transform -translate-y-1/2 bg-[#ffffff] border-2 border-dashed border-[#8F002D] rounded-lg p-4 w-72 h-80 text-gray-500 z-10">
             <div className="text-lg font-semibold mb-2">AI Assistant box</div>
           </div>
         )}
