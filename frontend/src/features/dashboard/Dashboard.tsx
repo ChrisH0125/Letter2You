@@ -37,7 +37,7 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="p-4 min-h-screen">
+    <div className="dashboard-page text-[#8F002D] p-4 min-h-screen">
       <h1 className="text-3xl font-bold mb-4">Your Letters</h1>
       {letters.length === 0 ? (
         <p>You haven’t sent any letters yet.</p>
