@@ -12,6 +12,7 @@
     "concurrently": "^8.2.0"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.24.1",
     "firebase": "^12.3.0"
   }
 }
