@@ -97,14 +97,20 @@ function App() {
 
       <div className="pt-16" /> {/* spacing to account for fixed navbar */}
 
-      <main className="flex-1 flex items-center justify-center mb-8">
+      <main className="flex-1 flex items-center justify-center mb-8 relative">
+        {showAssistant && (
+          <div className="absolute left-8 top-1/2 transform -translate-y-1/2 bg-gray-100 border-2 border-dashed border-gray-300 rounded-lg p-4 w-72 h-80 text-gray-500 z-10">
+            <div className="text-lg font-semibold mb-2">AI Assistant box</div>
+          </div>
+        )}
+
         <div className="page">
           <div className="logoLetterWrap flex flex-col items-start">
             <div className="hero-panel">
               <div className="hero-pill" />
 
               <div className="left-controls">
-                <button className="control-btn" title="AI-Assistant" aria-label="AI-Assistant" onClick={() => setShowAssistant(true)}>
+                <button className="control-btn" title="AI-Assistant" aria-label="AI-Assistant" onClick={() => setShowAssistant(!showAssistant)}>
                   <img src={sparkleImg} alt="sparkle" />
                 </button>
                 <button className="control-btn" title="Voice" aria-label="Voice" onClick={() => (letterRef.current as any)?.toggleMic()}>
