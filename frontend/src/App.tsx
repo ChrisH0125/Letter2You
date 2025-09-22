@@ -104,7 +104,7 @@ function App() {
               <div className="hero-pill" />
 
               <div className="left-controls">
-                <button className="control-btn" title="AI-Assistant" aria-label="AI-Assistant" onClick={() => setShowAssistant(true)}>
+                <button className="control-btn" title="AI-Assistant" aria-label="AI-Assistant" onClick={() => setShowAssistant(!showAssistant)}>
                   <img src={sparkleImg} alt="sparkle" />
                 </button>
                 <button className="control-btn" title="Voice" aria-label="Voice" onClick={() => (letterRef.current as any)?.toggleMic()}>
@@ -121,9 +121,7 @@ function App() {
                 </div>
 
                 <div className="polaroid-section flex justify-center flex-col items-center gap-9">
-                  <div className="hover:scale-105 hover:shadow-xl transition-all duration-300">
-                    <PolaroidPreview />
-                  </div>
+                  <PolaroidPreview />
                   <input type="email" className="email-input w-full text-[#8b2b2b] text-center bg-[#ffffff] rounded-[6px]" placeholder="Enter email to send to" />
                 </div>
               </div>

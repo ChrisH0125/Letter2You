@@ -93,8 +93,8 @@ export default function PolaroidPreview(){
   }, [])
 
   return (
-    <div className="relative flex flex-col items-center polaroid-section-outer hover:scale-105 hover:shadow-xl transition-all duration-300">
-  <div className="polaroid-frame" onClick={(e) => { e.stopPropagation(); if (!showCamera && !showDescInput) openCamera() }} title="Click to add photo">
+    <div className="relative flex flex-col items-center polaroid-section-outer">
+  <div className="polaroid-frame hover:scale-105 hover:shadow-xl transition-all duration-300 cursor-pointer" onClick={(e) => { e.stopPropagation(); if (!showCamera && !showDescInput) openCamera() }} title="Click to add photo">
         {imageSrc ? (
           <div className="polaroid-inner">
             <img src={imageSrc} alt={desc || 'Captured polaroid'} className="polaroid-img" />
