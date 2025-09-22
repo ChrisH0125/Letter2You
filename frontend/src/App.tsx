@@ -6,6 +6,7 @@ import PolaroidPreview from './components/PolaroidPreview'
 import LetterForm from './features/letters/LetterForm'
 // removed unused icons
 import AboutPage from './features/about/AboutPage'
+import Dashboard from './features/dashboard/Dashboard'
 import Footer from './components/Footer'
 import SignUp from './features/auth/SignUp'
 import Navbar from './components/Navbar'
@@ -21,7 +22,7 @@ signOut(auth).catch((err) => console.error("Error signing out on startup:", err)
 import './App.css'
 
 function App() {
-  const [view, setView] = useState<'home' | 'about' | 'signup'>('home')
+  const [view, setView] = useState<'home' | 'about' | 'signup' | 'dashboard'>('home');
   const [helpOpen, setHelpOpen] = useState(false)
   const letterRef = useRef<any | null>(null)
   const [showAssistant, setShowAssistant] = useState(false)
@@ -121,6 +122,21 @@ function App() {
       </div>
     )
   }
+
+    if (view === 'dashboard') {
+    return (
+      <div className="min-h-screen flex flex-col">
+        <Navbar view={view} setView={setView} user={user} onLogout={() => {
+          signOut(auth);
+          setView("home");
+        }} />
+        <div className="pt-16 flex-1 flex w-full">
+          <Dashboard />
+        </div>
+      </div>
+    );
+  }
+
 
   if (view === 'signup') {
     return (
