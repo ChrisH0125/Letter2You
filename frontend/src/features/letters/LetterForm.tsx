@@ -95,6 +95,7 @@ function LetterForm(_props: any, ref: any) {
 
   useImperativeHandle(ref, () => ({
     toggleMic,
+    getCurrentMessage: () => message,
   }));
 
   return (
