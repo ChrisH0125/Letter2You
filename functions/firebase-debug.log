@@ -1,0 +1,61 @@
+[debug] [2025-09-22T02:00:54.082Z] ----------------------------------------------------------------------
+[debug] [2025-09-22T02:00:54.084Z] Command:       /usr/local/bin/node /Users/kevintrinh/Letter2You/node_modules/.bin/firebase functions:secrets:set EMAIL_USER
+[debug] [2025-09-22T02:00:54.084Z] CLI Version:   14.17.0
+[debug] [2025-09-22T02:00:54.084Z] Platform:      darwin
+[debug] [2025-09-22T02:00:54.084Z] Node Version:  v20.12.2
+[debug] [2025-09-22T02:00:54.084Z] Time:          Sun Sep 21 2025 22:00:54 GMT-0400 (Eastern Daylight Time)
+[debug] [2025-09-22T02:00:54.084Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-09-22T02:00:54.189Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-09-22T02:00:54.190Z] > authorizing via signed-in user (kevin.trinh.8923@gmail.com)
+[debug] [2025-09-22T02:00:54.190Z] Checked if tokens are valid: true, expires at: 1758509706245
+[debug] [2025-09-22T02:00:54.190Z] Checked if tokens are valid: true, expires at: 1758509706245
+[debug] [2025-09-22T02:00:54.191Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/to-you-5-years/services/secretmanager.googleapis.com [none]
+[debug] [2025-09-22T02:00:54.191Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/to-you-5-years/services/secretmanager.googleapis.com x-goog-quota-user=projects/to-you-5-years
+[debug] [2025-09-22T02:00:54.572Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/to-you-5-years/services/secretmanager.googleapis.com 200
+[debug] [2025-09-22T02:00:54.572Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/to-you-5-years/services/secretmanager.googleapis.com [omitted]
+[debug] [2025-09-22T02:00:54.572Z] Checked if tokens are valid: true, expires at: 1758509706245
+[debug] [2025-09-22T02:00:54.572Z] Checked if tokens are valid: true, expires at: 1758509706245
+[debug] [2025-09-22T02:00:54.572Z] >>> [apiv2][query] POST https://serviceusage.googleapis.com/v1/projects/to-you-5-years/services/secretmanager.googleapis.com:enable [none]
+[debug] [2025-09-22T02:00:54.572Z] >>> [apiv2][(partial)header] POST https://serviceusage.googleapis.com/v1/projects/to-you-5-years/services/secretmanager.googleapis.com:enable x-goog-quota-user=projects/to-you-5-years
+[debug] [2025-09-22T02:00:55.332Z] <<< [apiv2][status] POST https://serviceusage.googleapis.com/v1/projects/to-you-5-years/services/secretmanager.googleapis.com:enable 200
+[debug] [2025-09-22T02:00:55.332Z] <<< [apiv2][body] POST https://serviceusage.googleapis.com/v1/projects/to-you-5-years/services/secretmanager.googleapis.com:enable [omitted]
+[debug] [2025-09-22T02:01:05.342Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-09-22T02:01:05.343Z] > authorizing via signed-in user (kevin.trinh.8923@gmail.com)
+[debug] [2025-09-22T02:01:05.343Z] [iam] checking project to-you-5-years for permissions ["firebase.projects.get","secretmanager.secrets.create","secretmanager.secrets.get","secretmanager.secrets.update","secretmanager.versions.add"]
+[debug] [2025-09-22T02:01:05.344Z] Checked if tokens are valid: true, expires at: 1758509706245
+[debug] [2025-09-22T02:01:05.344Z] Checked if tokens are valid: true, expires at: 1758509706245
+[debug] [2025-09-22T02:01:05.345Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/to-you-5-years:testIamPermissions [none]
+[debug] [2025-09-22T02:01:05.345Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/to-you-5-years:testIamPermissions x-goog-quota-user=projects/to-you-5-years
+[debug] [2025-09-22T02:01:05.345Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/to-you-5-years:testIamPermissions {"permissions":["firebase.projects.get","secretmanager.secrets.create","secretmanager.secrets.get","secretmanager.secrets.update","secretmanager.versions.add"]}
+[debug] [2025-09-22T02:01:05.512Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/to-you-5-years:testIamPermissions 200
+[debug] [2025-09-22T02:01:05.513Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/to-you-5-years:testIamPermissions {"permissions":["firebase.projects.get","secretmanager.secrets.create","secretmanager.secrets.get","secretmanager.secrets.update","secretmanager.versions.add"]}
+[debug] [2025-09-22T02:01:05.514Z] Checked if tokens are valid: true, expires at: 1758509706245
+[debug] [2025-09-22T02:01:05.514Z] Checked if tokens are valid: true, expires at: 1758509706245
+[debug] [2025-09-22T02:01:05.515Z] >>> [apiv2][query] GET https://cloudresourcemanager.googleapis.com/v1/projects/to-you-5-years [none]
+[debug] [2025-09-22T02:01:05.626Z] <<< [apiv2][status] GET https://cloudresourcemanager.googleapis.com/v1/projects/to-you-5-years 200
+[debug] [2025-09-22T02:01:05.626Z] <<< [apiv2][body] GET https://cloudresourcemanager.googleapis.com/v1/projects/to-you-5-years {"projectNumber":"503424530100","projectId":"to-you-5-years","lifecycleState":"ACTIVE","name":"to-you-5-years","labels":{"firebase":"enabled","firebase-core":"disabled"},"createTime":"2025-09-19T19:29:03.857753Z"}
+[debug] [2025-09-22T02:01:05.627Z] Checked if tokens are valid: true, expires at: 1758509706245
+[debug] [2025-09-22T02:01:05.627Z] Checked if tokens are valid: true, expires at: 1758509706245
+[debug] [2025-09-22T02:01:05.627Z] >>> [apiv2][query] GET https://secretmanager.googleapis.com/v1/projects/to-you-5-years/secrets/EMAIL_USER [none]
+[debug] [2025-09-22T02:01:05.866Z] <<< [apiv2][status] GET https://secretmanager.googleapis.com/v1/projects/to-you-5-years/secrets/EMAIL_USER 404
+[debug] [2025-09-22T02:01:05.866Z] <<< [apiv2][body] GET https://secretmanager.googleapis.com/v1/projects/to-you-5-years/secrets/EMAIL_USER {"error":{"code":404,"message":"Secret [projects/503424530100/secrets/EMAIL_USER] not found.","status":"NOT_FOUND"}}
+[debug] [2025-09-22T02:01:05.867Z] Checked if tokens are valid: true, expires at: 1758509706245
+[debug] [2025-09-22T02:01:05.868Z] Checked if tokens are valid: true, expires at: 1758509706245
+[debug] [2025-09-22T02:01:05.870Z] >>> [apiv2][query] POST https://secretmanager.googleapis.com/v1/projects/to-you-5-years/secrets secretId=EMAIL_USER
+[debug] [2025-09-22T02:01:05.870Z] >>> [apiv2][body] POST https://secretmanager.googleapis.com/v1/projects/to-you-5-years/secrets {"name":"EMAIL_USER","replication":{"automatic":{}},"labels":{"firebase-managed":"functions"}}
+[debug] [2025-09-22T02:01:06.090Z] <<< [apiv2][status] POST https://secretmanager.googleapis.com/v1/projects/to-you-5-years/secrets 200
+[debug] [2025-09-22T02:01:06.090Z] <<< [apiv2][body] POST https://secretmanager.googleapis.com/v1/projects/to-you-5-years/secrets {"name":"projects/503424530100/secrets/EMAIL_USER","replication":{"automatic":{}},"createTime":"2025-09-22T02:01:05.968744Z","labels":{"firebase-managed":"functions"},"etag":"\"163f5a313ee34d\""}
+[debug] [2025-09-22T02:02:21.687Z] ExitPromptError: User force closed the prompt with SIGINT
+    at Interface.sigint (/Users/kevintrinh/Letter2You/node_modules/@inquirer/core/dist/commonjs/lib/create-prompt.js:101:37)
+    at Interface.emit (node:events:518:28)
+    at Interface.emit (node:domain:488:12)
+    at [_ttyWrite] [as _ttyWrite] (node:internal/readline/interface:1125:18)
+    at ReadStream.onkeypress (node:internal/readline/interface:264:20)
+    at ReadStream.emit (node:events:530:35)
+    at ReadStream.emit (node:domain:488:12)
+    at emitKeys (node:internal/readline/utils:371:14)
+    at emitKeys.next (<anonymous>)
+    at ReadStream.onData (node:internal/readline/emitKeypressEvents:64:36)
+[error] 
+[error] Error: An unexpected error has occurred.

@@ -2,8 +2,8 @@ import { useState } from "react";
 import littleGuy from '../assets/littleGuy.png'
 
 type NavbarProps = {
-  view: "home" | "about" | "signup";
-  setView: (view: "home" | "about" | "signup") => void;
+  view: "home" | "about" | "signup" | "dashboard";
+  setView: (view: "home" | "about" | "signup" | "dashboard") => void;
   user: import("firebase/auth").User | null;
   onLogout: () => void;
 };
@@ -48,6 +48,25 @@ export default function Navbar({ view, setView, user, onLogout }: NavbarProps) {
         >
           About
         </span>
+
+      {user && (
+        <span
+          onClick={() => setView('dashboard')}
+          style={{
+            backgroundColor: "#8F002D",
+            color: "white",
+            padding: "8px 12px",
+            borderRadius: "4px",
+            fontSize: "1.45rem",
+            cursor: "pointer",
+            lineHeight: "1",
+          }}
+          className="hover:opacity-80 transition"
+        >
+          Dashboard
+        </span>
+      )}
+
         {user ? (
         <span
           onClick={onLogout}

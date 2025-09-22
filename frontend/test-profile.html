@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Dashboard Test</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #8F002D;
+        }
+
+        .header h1 {
+            color: #8F002D;
+            margin: 0;
+        }
+
+        .letter-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            background: #fafafa;
+        }
+
+        .letter-content {
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+
+        .letter-meta {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 10px;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+
+        .status.sent {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status.scheduled {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .btn {
+            background: #8F002D;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background: #7a0026;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // Mock Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBG2t_tMu7XI9w3yAFmj1byoKhk_QU9Q4Q",
+            authDomain: "to-you-5-years.firebaseapp.com",
+            projectId: "to-you-5-years",
+            storageBucket: "to-you-5-years.firebasestorage.app",
+            messagingSenderId: "503424530100",
+            appId: "1:503424530100:web:f39051c0c8f8a0fc6609e1"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+        const auth = firebase.auth();
+
+        // Mock user data
+        const mockUser = {
+            uid: 'test-user-123',
+            email: 'test@example.com'
+        };
+
+        // Mock letters data
+        const mockLetters = [
+            {
+                id: 'letter-1',
+                text: 'Dear Mom, I hope this letter finds you well. I\'ve been thinking about you a lot lately and wanted to let you know how much you mean to me. Your love and support have been the foundation of everything good in my life.',
+                createdAt: new Date('2024-01-15'),
+                scheduledAt: Date.now() - 86400000, // 1 day ago (sent)
+                to: 'mom@example.com'
+            },
+            {
+                id: 'letter-2',
+                text: 'Hi Dad, I wanted to write you this letter to tell you about my recent achievements at work. I got promoted to senior developer, and I know I wouldn\'t have made it this far without your guidance and belief in me.',
+                createdAt: new Date('2024-01-20'),
+                scheduledAt: Date.now() + 2592000000, // 30 days from now (scheduled)
+                to: 'dad@example.com'
+            },
+            {
+                id: 'letter-3',
+                text: 'Dear Future Me, I hope you\'re reading this in a good place in life. Right now, I\'m feeling optimistic about the future and excited about all the possibilities ahead. Remember to always stay true to yourself and never give up on your dreams.',
+                createdAt: new Date('2024-01-25'),
+                scheduledAt: Date.now() + 15768000000, // 6 months from now (scheduled)
+            }
+        ];
+
+        function ProfileDashboard() {
+            const [letters, setLetters] = useState(mockLetters);
+            const [loading, setLoading] = useState(false);
+
+            const formatDate = (timestamp) => {
+                if (!timestamp) return 'Unknown date';
+
+                let date;
+                if (timestamp.toDate) {
+                    date = timestamp.toDate();
+                } else if (typeof timestamp === 'number') {
+                    date = new Date(timestamp);
+                } else {
+                    date = new Date(timestamp);
+                }
+
+                return date.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+            };
+
+            const getScheduledStatus = (scheduledAt) => {
+                const now = Date.now();
+                if (scheduledAt <= now) {
+                    return { status: 'sent', color: 'text-green-600' };
+                } else {
+                    const scheduledDate = new Date(scheduledAt);
+                    return {
+                        status: `scheduled for ${scheduledDate.toLocaleDateString()}`,
+                        color: 'text-blue-600'
+                    };
+                }
+            };
+
+            if (loading) {
+                return (
+                    <div className="container">
+                        <div className="empty-state">
+                            <div style={{ fontSize: '48px', marginBottom: '20px' }}>⏳</div>
+                            <p>Loading your letters...</p>
+                        </div>
+                    </div>
+                );
+            }
+
+            return (
+                <div className="container">
+                    <div className="header">
+                        <h1>Your Letters</h1>
+                        <p>Welcome back, {mockUser.email}! Here are all the letters you've written.</p>
+                    </div>
+
+                    {letters.length === 0 ? (
+                        <div className="empty-state">
+                            <div style={{ fontSize: '48px', marginBottom: '20px' }}>📝</div>
+                            <h3>No letters yet</h3>
+                            <p>You haven't written any letters yet. Start writing your first letter!</p>
+                            <a href="#" className="btn">Write Your First Letter</a>
+                        </div>
+                    ) : (
+                        <div>
+                            <div style={{ marginBottom: '20px' }}>
+                                <h2>{letters.length} letter{letters.length !== 1 ? 's' : ''} total</h2>
+                            </div>
+
+                            <div>
+                                {letters.map((letter) => {
+                                    const scheduledInfo = getScheduledStatus(letter.scheduledAt);
+                                    return (
+                                        <div key={letter.id} className="letter-card">
+                                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '10px' }}>
+                                                <div>
+                                                    <h3 style={{ margin: '0 0 5px 0', color: '#333' }}>
+                                                        Letter #{letter.id.slice(-8)}
+                                                    </h3>
+                                                    <p style={{ margin: '0', fontSize: '0.9em', color: '#666' }}>
+                                                        Created: {formatDate(letter.createdAt)}
+                                                    </p>
+                                                </div>
+                                                <span className={`status ${scheduledInfo.status === 'sent' ? 'sent' : 'scheduled'}`}>
+                                                    {scheduledInfo.status}
+                                                </span>
+                                            </div>
+
+                                            <div className="letter-content">
+                                                {letter.text}
+                                            </div>
+
+                                            {letter.to && (
+                                                <div className="letter-meta">
+                                                    <strong>To:</strong> {letter.to}
+                                                </div>
+                                            )}
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                        </div>
+                    )}
+                </div>
+            );
+        }
+
+        ReactDOM.render(<ProfileDashboard />, document.getElementById('root'));
+    </script>
+</body>
+
+</html>
