@@ -34,7 +34,7 @@ export default function SignUp() {
         onSubmit={handleSubmit}
         className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-96"
       >
-        <h1 className="text-2xl font-bold mb-6 text-center">Sign Up</h1>
+  <h1 className="text-2xl font-bold mb-6 text-center text-red-400">{isLogin ? 'Log in' : 'Sign Up'}</h1>
 
         <input
           type="email"
